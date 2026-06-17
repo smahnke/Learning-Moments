@@ -1,0 +1,91 @@
+/* App Container */
+.app-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border: 1px solid #dcdcdc;
+  min-height: 90vh;
+}
+
+/* ---------------- NAVBAR ---------------- */
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+.profile-circle {
+  width: 45px;
+  height: 45px;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------------- HEADER ---------------- */
+
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+
+/* ---------------- FILTERS ---------------- */
+
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.posts-header h2 {
+  margin: 0;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.topic-select,
+.search-input {
+  padding: 0.5rem;
+  border: 2px solid #333;
+  font-size: 1rem;
+}
+
+/* ---------------- POSTS ---------------- */
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-card {
+  border: 2px solid #333;
+  padding: 1rem;
+}
+
+.post-card h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.post-meta {
+  color: #555;
+  font-size: 0.95rem;
+}
