@@ -3,11 +3,15 @@ import { getAllPosts } from "../../services/postService"
 import { Post } from "../../posts/post"
 import "./Posts.css"
 import { FilterBar } from "./FilterBar"
+import { getAllTopics } from "../../services/TopicService"
+import { FilterTopic } from "./FilterTopic"
 
 export const AllPosts = () => {
     const [posts, setPosts] = useState([])
     const [filteredPosts, setFilteredPosts] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
+    const [selectedTopic, setSelectedTopic] = useState("")
+    const [allTopics, setAllTopics] = useState([])
 
     useEffect(() => {
         getAllPosts().then((postsArray) => {
@@ -16,10 +20,30 @@ export const AllPosts = () => {
     }, [])
 
     useEffect(() => {
-        const searchedPosts = posts.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        setFilteredPosts(searchedPosts)
-    }, [searchTerm, posts])
+        let filtered = posts
+
+        if (searchTerm !== "") {
+            filtered = filtered.filter(post =>
+                post.title
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+            )
+        }
+
+        if (selectedTopic !== "") {
+            filtered = filtered.filter(post =>
+                post.topicId === parseInt(selectedTopic)
+            )
+        }
+
+        setFilteredPosts(filtered)
+    }, [posts, searchTerm, selectedTopic])
+
+    useEffect(() => {
+        getAllTopics().then((topicArray) => {
+            setAllTopics(topicArray)
+        })
+    }, [])
 
     return (
         <div className="app-container">
@@ -29,15 +53,10 @@ export const AllPosts = () => {
                 <h2>All Posts</h2>
 
                 <div className="filter-controls">
-                    <select className="topic-select">
-                        <option>Topic Drop-down</option>
-                    </select>
+                    <FilterTopic
+                        topics={allTopics}
+                        setSelectedTopic={setSelectedTopic}/>
 
-                {/* <input
-                    className="search-input"
-                    type="text"
-                    placeholder="Search"
-                /> */}
                     <FilterBar setSearchTerm={setSearchTerm}/>
                 </div>
             </div>
